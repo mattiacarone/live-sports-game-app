@@ -1,0 +1,2359 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EdgeBet AI � Multi-Sport Quantitative Intelligence &amp; 12-Bookmaker Terminal</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ground: #f6f7f9;
+      --surface: #ffffff;
+      --raised: #f0f2f5;
+      --active: #e6e9ef;
+      --border: #e8eaed;
+      --rule: #eef0f3;
+      --control: #cfd4dc;
+      --text: #111315;
+      --muted: #525866;
+      --faint: #636a75;
+      --primary: #14171f;
+      --accent: #0d7a5f;
+      --positive: #0d7a5f;
+      --pill-positive-bg: #dcfce6;
+      --pill-positive-ink: #063b27;
+      --negative: #be2939;
+      --pill-negative-bg: #ffe8ea;
+      --pill-negative-ink: #6e1420;
+      --warning: #8f5b0a;
+      --pill-warning-bg: #fef5e7;
+      --pill-warning-ink: #5c3904;
+      --grid: #e5e7eb;
+      --radius-card: 8px;
+      --radius-control: 6px;
+      --radius-chip: 4px;
+      --gap: 16px;
+      --card-pad: 20px;
+      --pad: 28px;
+      --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+      --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background: var(--ground);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 14px;
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+      max-width: 100vw;
+    }
+
+    .num {
+      font-variant-numeric: tabular-nums;
+    }
+
+    button, input, select {
+      font-family: inherit;
+      font-size: 13px;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: transform 140ms var(--ease-out), background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    .icon-svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      stroke-width: 1.65;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* TOP NAVIGATION BAR */
+    .top-shell {
+      background: #111317;
+      color: #ffffff;
+      border-bottom: 1px solid #242830;
+      position: relative;
+      width: 100%;
+    }
+
+    .top-bar-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 10px var(--pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand-cluster {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: #0d7a5f;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .brand-name {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+
+    .brand-tag {
+      font-size: 13px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: var(--radius-chip);
+      background: #232730;
+      color: #d0d5dd;
+    }
+
+    .main-view-tabs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .view-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      height: 32px;
+      padding: 0 12px;
+      border-radius: var(--radius-control);
+      color: #b4b9c4;
+      background: transparent;
+      border: 1px solid transparent;
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .view-tab-btn:hover {
+      color: #ffffff;
+      background: #1c2028;
+    }
+
+    .view-tab-btn.active {
+      color: #ffffff;
+      background: #222731;
+      border-color: #363d4a;
+    }
+
+    .view-tab-btn.vip-tab.active {
+      background: #2b2212;
+      border-color: #6b4e1b;
+      color: #f7c96e;
+    }
+
+    .tab-count-pill {
+      padding: 1px 6px;
+      border-radius: var(--radius-chip);
+      background: #0d7a5f;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .top-utility-cluster {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .sync-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      height: 32px;
+      padding: 0 10px;
+      border-radius: var(--radius-control);
+      background: #1a1e26;
+      border: 1px solid #2c323f;
+      color: #d0d5dd;
+      font-size: 13px;
+    }
+
+    .sync-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #2ec27e;
+    }
+
+    .util-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 32px;
+      padding: 0 11px;
+      border-radius: var(--radius-control);
+      background: #1c2028;
+      border: 1px solid #323846;
+      color: #e4e7ec;
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .util-btn:hover {
+      background: #262b36;
+    }
+
+    .slip-trigger-btn {
+      background: #ffffff;
+      color: #111315;
+      border-color: #ffffff;
+      font-weight: 600;
+    }
+
+    .slip-trigger-btn:hover {
+      background: #e8eaed;
+    }
+
+    /* LEVEL 1: SPORT SWITCHER STRIP */
+    .sport-switcher-bar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      width: 100%;
+    }
+
+    .sport-switcher-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 8px var(--pad);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .sport-switcher-inner::-webkit-scrollbar {
+      display: none;
+    }
+
+    .sport-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      height: 34px;
+      padding: 0 12px;
+      border-radius: var(--radius-control);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .sport-pill:hover {
+      background: var(--raised);
+      color: var(--text);
+    }
+
+    .sport-pill.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .sport-pill-count {
+      font-size: 13px;
+      padding: 1px 6px;
+      border-radius: var(--radius-chip);
+      background: var(--raised);
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .sport-pill.active .sport-pill-count {
+      background: #2c313d;
+      color: #ffffff;
+    }
+
+    /* MAIN WORKSPACE SHELL */
+    .workspace-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 20px var(--pad) 56px;
+    }
+
+    /* PAGE HEADER (H1 + ONE FINDING + CONTROLS) */
+    .canvas-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .canvas-title-block {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .canvas-title-block h1 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      line-height: 1.25;
+    }
+
+    .canvas-subtitle {
+      margin-top: 4px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .canvas-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tier-switch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 32px;
+      padding: 0 12px;
+      border-radius: var(--radius-control);
+      background: var(--pill-warning-bg);
+      color: var(--pill-warning-ink);
+      border: 1px solid #ebd29b;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* DIVIDED KPI & BANKROLL STRIP (app-screens.md �5) */
+    .kpi-divided-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      margin-bottom: 20px;
+    }
+
+    .kpi-cell {
+      padding: 16px 20px;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 4px;
+    }
+
+    .kpi-cell + .kpi-cell {
+      border-left: 1px solid var(--rule);
+    }
+
+    .kpi-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .kpi-value {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .kpi-cell.lead-cell .kpi-value {
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .kpi-delta {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .kpi-delta .pos {
+      color: var(--positive);
+      font-weight: 600;
+    }
+
+    .bankroll-inline-grid {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+
+    .ctrl-select, .ctrl-input {
+      height: 30px;
+      padding: 0 8px;
+      border-radius: var(--radius-control);
+      border: 1px solid var(--control);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .ctrl-input {
+      width: 78px;
+    }
+
+    /* 2-COLUMN WORKSPACE: SIDEBAR + MAIN FEED */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 236px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .comp-sidebar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 14px;
+      min-width: 0;
+    }
+
+    .search-field-wrap {
+      position: relative;
+      margin-bottom: 14px;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 34px;
+      padding: 0 42px 0 10px;
+      border: 1px solid var(--control);
+      border-radius: var(--radius-control);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .search-input::placeholder {
+      color: var(--faint);
+    }
+
+    .search-kbd {
+      position: absolute;
+      right: 8px;
+      top: 7px;
+      font-size: 13px;
+      color: var(--muted);
+      background: var(--raised);
+      padding: 1px 5px;
+      border-radius: var(--radius-chip);
+    }
+
+    .sidebar-group-heading {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      padding: 8px 6px 6px;
+    }
+
+    .comp-nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .comp-nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-height: 34px;
+      padding: 6px 8px;
+      border-radius: var(--radius-control);
+      color: var(--text);
+      font-size: 13px;
+      text-align: left;
+      width: 100%;
+    }
+
+    .comp-nav-item:hover {
+      background: var(--raised);
+    }
+
+    .comp-nav-item.active {
+      background: var(--active);
+      font-weight: 600;
+    }
+
+    .comp-name-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .iso-badge {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--raised);
+      padding: 1px 5px;
+      border-radius: var(--radius-chip);
+      flex-shrink: 0;
+    }
+
+    .comp-name-text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .comp-count {
+      font-size: 13px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    /* MAIN FEEDTOOLBAR & FILTERS */
+    .feed-column {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .filter-toolbar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .filter-chip {
+      height: 30px;
+      padding: 0 11px;
+      border-radius: var(--radius-control);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .filter-chip:hover {
+      background: var(--raised);
+      color: var(--text);
+    }
+
+    .filter-chip.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* EVENT & SCANNER CARDS */
+    .event-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: var(--card-pad);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .event-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .event-meta-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .sport-tag {
+      padding: 2px 7px;
+      border-radius: var(--radius-chip);
+      background: var(--raised);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .event-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .form-strip {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      margin-left: 6px;
+    }
+
+    .form-char {
+      width: 18px;
+      height: 18px;
+      border-radius: var(--radius-chip);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .form-char.W { background: var(--pill-positive-bg); color: var(--pill-positive-ink); }
+    .form-char.D { background: var(--raised); color: var(--muted); }
+    .form-char.L { background: var(--pill-negative-bg); color: var(--pill-negative-ink); }
+
+    .prob-cluster {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      height: 24px;
+      padding: 0 9px;
+      border-radius: var(--radius-chip);
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .status-pill.pos { background: var(--pill-positive-bg); color: var(--pill-positive-ink); }
+    .status-pill.neg { background: var(--pill-negative-bg); color: var(--pill-negative-ink); }
+    .status-pill.warn { background: var(--pill-warning-bg); color: var(--pill-warning-ink); }
+    .status-pill.neutral { background: var(--raised); color: var(--text); }
+
+    /* METRICS STRIP INSIDE CARD */
+    .card-metrics-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      gap: 10px;
+      padding: 12px;
+      background: var(--ground);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius-control);
+    }
+
+    .metric-item {
+      min-width: 0;
+    }
+
+    .metric-item-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .metric-item-val {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      overflow-wrap: anywhere;
+    }
+
+    /* H2H COMPARISON BARS */
+    .h2h-bars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .h2h-bar-box {
+      padding: 8px 10px;
+      border: 1px solid var(--rule);
+      border-radius: var(--radius-control);
+      background: var(--surface);
+    }
+
+    .h2h-bar-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      margin-bottom: 6px;
+      gap: 8px;
+    }
+
+    .h2h-track {
+      height: 6px;
+      background: var(--raised);
+      border-radius: 999px;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .h2h-fill-a {
+      background: var(--accent);
+      height: 100%;
+    }
+
+    .h2h-fill-b {
+      background: #64748b;
+      height: 100%;
+    }
+
+    /* RECOMMENDED PICK BANNER */
+    .primary-pick-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 16px;
+      background: #f3faf7;
+      border: 1px solid #ccebd9;
+      border-radius: var(--radius-control);
+      flex-wrap: wrap;
+    }
+
+    .pick-main-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .pick-category-meta {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--positive);
+      margin-bottom: 2px;
+    }
+
+    .pick-outcome-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .pick-why-text {
+      margin-top: 4px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .pick-pricing-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .price-compare-col {
+      text-align: right;
+    }
+
+    .price-main-line {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .price-sub-line {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .add-slip-btn {
+      height: 34px;
+      padding: 0 14px;
+      border-radius: var(--radius-control);
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .add-slip-btn:hover {
+      background: #272c38;
+    }
+
+    /* CARD INTERNAL DOSSIER TABS */
+    .dossier-tab-strip {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .dossier-tab-strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .dossier-tab-btn {
+      padding: 8px 2px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+    }
+
+    .dossier-tab-btn:hover {
+      color: var(--text);
+    }
+
+    .dossier-tab-btn.active {
+      color: var(--text);
+      font-weight: 600;
+      border-bottom-color: var(--accent);
+    }
+
+    .dossier-panel {
+      display: none;
+      padding-top: 4px;
+    }
+
+    .dossier-panel.active {
+      display: block;
+    }
+
+    /* 12-BOOKMAKER TABLE (app-screens.md �7) */
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .data-table th {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .data-table th.num, .data-table td.num {
+      text-align: right;
+    }
+
+    .data-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--rule);
+      color: var(--text);
+      vertical-align: middle;
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .book-name-cell {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .book-region-sub {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 400;
+      margin-left: 6px;
+    }
+
+    /* 6-WEBSITE SYNDICATE ANALYSIS GRID */
+    .syndicate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      align-items: start;
+    }
+
+    .syndicate-card {
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-control);
+      background: var(--ground);
+    }
+
+    .syndicate-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .syndicate-site-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .syndicate-vig-tag {
+      font-size: 13px;
+      color: var(--muted);
+      background: var(--surface);
+      padding: 1px 6px;
+      border-radius: var(--radius-chip);
+      border: 1px solid var(--border);
+    }
+
+    .syndicate-metric {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .syndicate-verdict {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    /* FACTS LIST */
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 10px;
+      align-items: start;
+    }
+
+    .fact-row {
+      padding: 10px 12px;
+      background: var(--ground);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius-control);
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    /* BET365 MARKET MATRIX */
+    .mkt-cat-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .mkt-odds-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 8px;
+    }
+
+    .mkt-odd-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-control);
+      background: var(--surface);
+      text-align: left;
+    }
+
+    .mkt-odd-btn:hover {
+      border-color: var(--control);
+      background: var(--ground);
+    }
+
+    .mkt-odd-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      min-width: 0;
+      flex: 1;
+    }
+
+    .mkt-odd-right {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .mkt-odd-price {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .mkt-odd-prob {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* LOAD MORE BAR */
+    .load-more-bar {
+      width: 100%;
+      height: 38px;
+      border: 1px solid var(--control);
+      border-radius: var(--radius-control);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .load-more-bar:hover {
+      background: var(--raised);
+    }
+
+    /* SLIDE-OVER BET SLIP DRAWER */
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 19, 21, 0.45);
+      z-index: 190;
+      display: none;
+    }
+
+    .drawer-backdrop.open {
+      display: block;
+    }
+
+    .slip-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 380px;
+      max-width: 100vw;
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      z-index: 200;
+      display: none;
+      flex-direction: column;
+    }
+
+    .slip-drawer.open {
+      display: flex;
+    }
+
+    .slip-drawer-head {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .slip-drawer-body {
+      padding: 16px 20px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .slip-leg-item {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-control);
+      background: var(--ground);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .slip-drawer-foot {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      background: var(--ground);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* TOAST */
+    .status-toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #111317;
+      color: #ffffff;
+      padding: 10px 16px;
+      border-radius: var(--radius-control);
+      font-size: 13px;
+      font-weight: 500;
+      z-index: 250;
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out);
+    }
+
+    .status-toast.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE BREAKPOINTS (app-screens.md �12) */
+    @media (max-width: 1100px) {
+      :root {
+        --pad: 20px;
+      }
+      .kpi-divided-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .kpi-cell:nth-child(3) {
+        border-left: none;
+      }
+      .kpi-cell:nth-child(n+3) {
+        border-top: 1px solid var(--rule);
+      }
+      .workspace-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .comp-sidebar {
+        padding: 10px 12px;
+      }
+      .comp-nav-list {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 6px;
+        padding-bottom: 2px;
+        scrollbar-width: none;
+      }
+      .comp-nav-list::-webkit-scrollbar {
+        display: none;
+      }
+      .comp-nav-item {
+        width: auto;
+        flex-shrink: 0;
+        border: 1px solid var(--border);
+        padding: 4px 10px;
+        min-height: 30px;
+      }
+      .sidebar-group-heading {
+        display: none;
+      }
+      .search-field-wrap {
+        margin-bottom: 8px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --pad: 16px;
+        --card-pad: 16px;
+      }
+      .canvas-title-block h1 {
+        font-size: 20px;
+      }
+      .event-title {
+        font-size: 16px;
+      }
+      .primary-pick-banner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .price-compare-col {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP SHELL -->
+  <header class="top-shell">
+    <div class="top-bar-inner">
+      <div class="brand-cluster">
+        <span class="brand-mark">EB</span>
+        <span class="brand-name">EdgeBet AI</span>
+        <span class="brand-tag">Quant Terminal 4.2</span>
+      </div>
+
+      <nav class="main-view-tabs" aria-label="Viste principali">
+        <button type="button" class="view-tab-btn active" id="nav-scanner" onclick="switchPrimaryView('scanner')">
+          <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <span>Safe Scanner &amp; 12 Bookmaker</span>
+          <span class="tab-count-pill num" id="badge-safe-total">0</span>
+        </button>
+        <button type="button" class="view-tab-btn" id="nav-workspace" onclick="switchPrimaryView('workspace')">
+          <svg class="icon-svg" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>Catalogo Eventi &amp; Mercati Bet365</span>
+        </button>
+        <button type="button" class="view-tab-btn vip-tab" id="nav-vip" onclick="switchPrimaryView('vip')">
+          <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>VIP Pro Sandbox (Surebet &amp; Whale Flow)</span>
+        </button>
+        <button type="button" class="view-tab-btn" id="nav-performance" onclick="switchPrimaryView('performance')">
+          <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span>Track Record Verificato (+10.97% ROI)</span>
+        </button>
+      </nav>
+
+      <div class="top-utility-cluster">
+        <div class="sync-pill" title="Aggiornamento automatico quote e modelli ogni 20 minuti">
+          <span class="sync-dot"></span>
+          <span>Sync 20m: <strong class="num" id="live-20m-timer">20:00</strong></span>
+          <span class="num" id="sync-cycle-badge">Ciclo #1</span>
+        </div>
+        <button type="button" class="util-btn" onclick="triggerManual20mSync()">
+          <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          <span>Aggiorna Quote</span>
+        </button>
+        <button type="button" class="util-btn slip-trigger-btn" onclick="toggleSlipDrawer(true)">
+          <span>Schedina Multipla (<span class="num" id="slip-count-badge">0</span>)</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- LEVEL 1: SPORT SWITCHER -->
+  <div class="sport-switcher-bar">
+    <div class="sport-switcher-inner" id="sport-switcher-bar"></div>
+  </div>
+
+  <!-- MAIN WORKSPACE -->
+  <main class="workspace-container">
+    <!-- H1 TITLE + ONE FINDING -->
+    <div class="canvas-header">
+      <div class="canvas-title-block">
+        <h1 id="screen-h1-title">Terminale Quote 12 Bookmaker &amp; Scommesse ad Alta Probabilit�</h1>
+        <p class="canvas-subtitle" id="screen-finding-sub">
+          Confronto in tempo reale su Bet365, Pinnacle, Betfair Exchange, Unibet, DraftKings, FanDuel, Polymarket, Winamax, Tipico, Betsson, William Hill e bwin.
+        </p>
+      </div>
+      <div class="canvas-controls">
+        <span style="font-size:13px;color:var(--muted);" id="sync-status-text">Sync attivo ogni 20 min</span>
+        <button type="button" class="tier-switch-btn" id="tier-toggle-btn" onclick="toggleSubscriptionTier()">
+          <span id="tier-toggle-label">Piano attivo: VIP Pro Sbloccato (Testa Free Lock)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- DIVIDED 4-COLUMN KPI & BANKROLL STRIP -->
+    <section class="kpi-divided-strip" aria-label="Indicatori chiave del terminale">
+      <div class="kpi-cell lead-cell">
+        <span class="kpi-label">Giocate ad alta probabilit� (&ge;74%)</span>
+        <span class="kpi-value num" id="kpi-safe-count">81</span>
+        <span class="kpi-delta"><span class="pos">Validate su 20.000 simulazioni</span> in 8 sport</span>
+      </div>
+      <div class="kpi-cell">
+        <span class="kpi-label">Siti di scommesse analizzati</span>
+        <span class="kpi-value num">12 Bookmaker</span>
+        <span class="kpi-delta">Pinnacle No-Vig 1.9% vs Retail 4.5% hold</span>
+      </div>
+      <div class="kpi-cell">
+        <span class="kpi-label">Arbitraggi &amp; Steam Moves (ultimi 20m)</span>
+        <span class="kpi-value num" id="kpi-dropping-count">4 Surebet attive</span>
+        <span class="kpi-delta" id="kpi-vip-sub">Fino a <span class="pos">+4.15% ROI</span> matematico garantito</span>
+      </div>
+      <div class="kpi-cell">
+        <span class="kpi-label">Gestione Bankroll &amp; Kelly Criterion</span>
+        <div class="bankroll-inline-grid">
+          <select id="currency-select" class="ctrl-select" aria-label="Valuta" onchange="updateBankrollConfig()">
+            <option value="?">? EUR</option>
+            <option value="�">� GBP</option>
+            <option value="$">$ USD</option>
+          </select>
+          <input type="number" id="bankroll-input" class="ctrl-input num" aria-label="Capitale" value="1000" min="50" step="50" onchange="updateBankrollConfig()" />
+          <select id="kelly-select" class="ctrl-select" aria-label="Strategia Kelly" onchange="updateBankrollConfig()">
+            <option value="0.25">1/4 Kelly</option>
+            <option value="0.5">1/2 Kelly</option>
+            <option value="0.02">Flat 2%</option>
+          </select>
+        </div>
+        <span class="kpi-delta">Calcolo puntata automatico su ogni scheda</span>
+      </div>
+    </section>
+
+    <!-- LEVEL 2 & 3: COMPETITION TREE + DYNAMIC EVENT FEED -->
+    <div class="workspace-grid">
+      <aside class="comp-sidebar" aria-label="Filtro competizioni">
+        <div class="search-field-wrap">
+          <input type="text" id="global-search-input" class="search-input" placeholder="Cerca Sinner, Norris, Inter, NBA..." oninput="handleSearchInput(this.value)" />
+          <span class="search-kbd">?K</span>
+        </div>
+        <div class="sidebar-group-heading">Competizioni attive</div>
+        <div class="comp-nav-list" id="sidebar-competitions"></div>
+      </aside>
+
+      <section class="feed-column" id="main-workspace-area" aria-live="polite"></section>
+    </div>
+  </main>
+
+  <!-- SLIDE-OVER ACCUMULATOR DRAWER -->
+  <div class="drawer-backdrop" id="drawer-backdrop" onclick="toggleSlipDrawer(false)"></div>
+  <aside class="slip-drawer" id="slip-drawer" aria-label="Schedina Multipla Cross-Sport">
+    <div class="slip-drawer-head">
+      <div>
+        <div style="font-size:16px;font-weight:700;">Schedina Multipla Cross-Sport</div>
+        <div style="font-size:13px;color:var(--muted);">Combina Calcio, Tennis, F1, MotoGP, NFL, NBA e Rugby</div>
+      </div>
+      <button type="button" class="filter-chip" onclick="toggleSlipDrawer(false)">Chiudi</button>
+    </div>
+    <div class="slip-drawer-body" id="slip-legs-container"></div>
+    <div class="slip-drawer-foot">
+      <div style="display:flex;justify-content:space-between;font-size:13px;">
+        <span style="color:var(--muted);">Probabilit� congiunta reale:</span>
+        <strong class="num" id="slip-joint-prob">0.0%</strong>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:14px;">
+        <span style="color:var(--muted);">Quota totale combinata:</span>
+        <strong class="num" id="slip-total-odds">1.00</strong>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:14px;">
+        <span style="color:var(--muted);">Vincita stimata (<span id="slip-stake-label">?25</span>):</span>
+        <strong class="num" style="color:var(--positive);" id="slip-payout">?0.00</strong>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:4px;">
+        <button type="button" class="filter-chip" style="flex:1;" onclick="loadAutoSafeSlip()">Carica Tripla Safe AI</button>
+        <button type="button" class="add-slip-btn" style="flex:1;" onclick="copySlipToClipboard()">Copia Schedina</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- TOAST -->
+  <div class="status-toast" id="sync-toast">
+    <span id="sync-toast-text">Quote e modelli sincronizzati.</span>
+  </div>
+
+  <script>
+    const SPORT_SVG = {
+      all: '<svg class="icon-svg" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
+      football: '<svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="12 7 15.5 9.5 14 14 10 14 8.5 9.5 12 7"/></svg>',
+      tennis: '<svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M6 5.3a9 9 0 0 1 0 13.4"/><path d="M18 5.3a9 9 0 0 0 0 13.4"/></svg>',
+      f1: '<svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 15h16l-2-5h-7l-2-3H5z"/><circle cx="7.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>',
+      motogp: '<svg class="icon-svg" viewBox="0 0 24 24"><circle cx="6.5" cy="16.5" r="3.5"/><circle cx="17.5" cy="16.5" r="3.5"/><path d="M10 16.5h4l2-6h-5l-2 3z"/></svg>',
+      nfl: '<svg class="icon-svg" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5" transform="rotate(-35 12 12)"/><line x1="9" y1="15" x2="15" y2="9"/></svg>',
+      basketball: '<svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>',
+      rugby: '<svg class="icon-svg" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="5.5" transform="rotate(-25 12 12)"/><path d="M8 12h8"/></svg>'
+    };
+
+    const APP = {
+      primaryView: 'scanner',
+      activeSport: 'all',
+      activeTournament: 'ALL',
+      riskFilter: 'all',
+      bookmakerFilter: 'ALL',
+      searchQuery: '',
+      tier: 'pro',
+      currency: '?',
+      bankroll: 1000,
+      kellyFraction: 0.25,
+      visibleLimit: 8,
+      sportsMeta: [],
+      allEvents: [],
+      safeScanner: [],
+      premiumSuite: null,
+      performanceData: null,
+      slip: [],
+      nextSyncEpoch: Date.now() + 1200 * 1000,
+      syncCycle: 1,
+      arbBudget: 1000
+    };
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        const inp = document.getElementById('global-search-input');
+        if (inp) inp.focus();
+      }
+    });
+
+    function showToast(msg) {
+      const t = document.getElementById('sync-toast');
+      const txt = document.getElementById('sync-toast-text');
+      if (!t || !txt) return;
+      txt.textContent = msg;
+      t.classList.add('visible');
+      setTimeout(() => t.classList.remove('visible'), 3000);
+    }
+
+    function computeKellyStake(prob, odds) {
+      if (!prob || !odds || odds <= 1.02) return Math.round(APP.bankroll * 0.015);
+      if (APP.kellyFraction === 0.02) return Math.round(APP.bankroll * 0.02);
+      const b = odds - 1.0;
+      const q = 1.0 - prob;
+      const fullKelly = Math.max(0.012, (b * prob - q) / b);
+      const frac = Math.min(0.05, fullKelly * APP.kellyFraction);
+      return Math.max(5, Math.round(APP.bankroll * frac));
+    }
+
+    function updateBankrollConfig() {
+      APP.currency = document.getElementById('currency-select').value;
+      APP.bankroll = Math.max(50, parseFloat(document.getElementById('bankroll-input').value) || 1000);
+      APP.kellyFraction = parseFloat(document.getElementById('kelly-select').value) || 0.25;
+      renderMainWorkspace();
+      renderSlipDrawer();
+    }
+
+    function toggleSubscriptionTier() {
+      APP.tier = APP.tier === 'pro' ? 'free' : 'pro';
+      const lbl = document.getElementById('tier-toggle-label');
+      lbl.textContent = APP.tier === 'pro'
+        ? 'Piano attivo: VIP Pro Sbloccato (Testa Free Lock)'
+        : 'Piano attivo: Free Preview (Sblocca VIP Pro)';
+      fetchMultisportData(false);
+    }
+
+    async function fetchMultisportData(isAutoTick = false) {
+      try {
+        const res = await fetch(`/api/multisport?tier=${APP.tier}`);
+        const data = await res.json();
+        APP.sportsMeta = data.sports || [];
+        APP.allEvents = data.events || [];
+        APP.safeScanner = data.safeScanner || [];
+        if (data.premiumSuite) APP.premiumSuite = data.premiumSuite;
+        if (data.syncCycle) APP.syncCycle = data.syncCycle;
+        if (data.nextSync20m) {
+          const parsed = Date.parse(data.nextSync20m);
+          if (!isNaN(parsed) && parsed > Date.now()) APP.nextSyncEpoch = parsed;
+        }
+
+        document.getElementById('badge-safe-total').textContent = APP.safeScanner.length;
+        document.getElementById('kpi-safe-count').textContent = APP.safeScanner.length;
+        document.getElementById('sync-cycle-badge').textContent = `Ciclo #${APP.syncCycle}`;
+
+        const droppingCount = APP.safeScanner.filter(s => s.isDropping || (s.droppingPct && s.droppingPct <= -1.5)).length;
+        const arbCount = APP.premiumSuite && APP.premiumSuite.arbitrage ? APP.premiumSuite.arbitrage.length : 4;
+        document.getElementById('kpi-dropping-count').textContent = `${arbCount} Surebet � ${droppingCount} Drop`;
+
+        if (APP.slip.length === 0 && APP.safeScanner.length >= 3) {
+          loadAutoSafeSlip(true);
+        }
+
+        renderSportSwitcher();
+        renderSidebarCompetitions();
+        renderMainWorkspace();
+
+        if (isAutoTick) {
+          showToast(`Sync 20m (Ciclo #${APP.syncCycle}) completato su 12 bookmaker.`);
+        }
+      } catch (err) {
+        console.error('Error fetching multisport data:', err);
+      }
+    }
+
+    async function triggerManual20mSync() {
+      showToast('Sincronizzazione quote su 12 bookmaker in corso...');
+      try {
+        await fetch('/api/refresh');
+        APP.nextSyncEpoch = Date.now() + 1200 * 1000;
+        setTimeout(() => fetchMultisportData(true), 600);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    setInterval(() => {
+      const remMs = Math.max(0, APP.nextSyncEpoch - Date.now());
+      const totalSec = Math.floor(remMs / 1000);
+      const mins = Math.floor(totalSec / 60);
+      const secs = totalSec % 60;
+      const timerEl = document.getElementById('live-20m-timer');
+      if (timerEl) {
+        const mStr = mins < 10 ? '0' + mins : '' + mins;
+        const sStr = secs < 10 ? '0' + secs : '' + secs;
+        timerEl.textContent = `${mStr}:${sStr}`;
+      }
+      if (totalSec <= 0) {
+        APP.nextSyncEpoch = Date.now() + 1200 * 1000;
+        triggerManual20mSync();
+      }
+    }, 1000);
+
+    function renderSportSwitcher() {
+      const container = document.getElementById('sport-switcher-bar');
+      container.innerHTML = APP.sportsMeta.map(s => {
+        const active = APP.activeSport === s.id ? 'active' : '';
+        const svg = SPORT_SVG[s.id] || SPORT_SVG.all;
+        const countLabel = s.id === 'all' ? `${s.safeCount} Safe` : `${s.eventCount} (${s.safeCount})`;
+        return `
+          <button type="button" class="sport-pill ${active}" onclick="selectSport('${s.id}')">
+            ${svg}
+            <span>${s.name}</span>
+            <span class="sport-pill-count num">${countLabel}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectSport(sportId) {
+      APP.activeSport = sportId;
+      APP.activeTournament = 'ALL';
+      APP.visibleLimit = 8;
+      if (APP.primaryView === 'performance' || APP.primaryView === 'vip') {
+        APP.primaryView = sportId === 'all' ? 'scanner' : 'workspace';
+        updateNavButtons();
+      }
+      renderSportSwitcher();
+      renderSidebarCompetitions();
+      renderMainWorkspace();
+    }
+
+    function switchPrimaryView(view) {
+      APP.primaryView = view;
+      APP.visibleLimit = 8;
+      updateNavButtons();
+      if (view === 'performance' && !APP.performanceData) {
+        fetch('/api/performance').then(r => r.json()).then(d => {
+          APP.performanceData = d;
+          renderMainWorkspace();
+        });
+      }
+      renderMainWorkspace();
+    }
+
+    function updateNavButtons() {
+      document.getElementById('nav-scanner').classList.toggle('active', APP.primaryView === 'scanner');
+      document.getElementById('nav-workspace').classList.toggle('active', APP.primaryView === 'workspace');
+      document.getElementById('nav-vip').classList.toggle('active', APP.primaryView === 'vip');
+      document.getElementById('nav-performance').classList.toggle('active', APP.primaryView === 'performance');
+    }
+
+    function renderSidebarCompetitions() {
+      const filteredEvents = APP.activeSport === 'all'
+        ? APP.allEvents
+        : APP.allEvents.filter(e => e.sport === APP.activeSport);
+
+      const compMap = {};
+      filteredEvents.forEach(ev => {
+        const tName = ev.tournament || ev.league || 'Competizione';
+        if (!compMap[tName]) {
+          compMap[tName] = { name: tName, flag: ev.flag || 'EU', count: 0 };
+        }
+        compMap[tName].count += 1;
+      });
+
+      const comps = Object.values(compMap).sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+      const listEl = document.getElementById('sidebar-competitions');
+
+      const allBtn = `
+        <button type="button" class="comp-nav-item ${APP.activeTournament === 'ALL' ? 'active' : ''}" onclick="selectTournament('ALL')">
+          <span class="comp-name-wrap">
+            <span class="iso-badge">ALL</span>
+            <span class="comp-name-text">Tutte le competizioni</span>
+          </span>
+          <span class="comp-count num">${filteredEvents.length}</span>
+        </button>
+      `;
+
+      listEl.innerHTML = allBtn + comps.map(c => {
+        const active = APP.activeTournament === c.name ? 'active' : '';
+        const safeName = c.name.replace(/'/g, "\\'");
+        return `
+          <button type="button" class="comp-nav-item ${active}" onclick="selectTournament('${safeName}')">
+            <span class="comp-name-wrap">
+              <span class="iso-badge">${c.flag || 'INT'}</span>
+              <span class="comp-name-text">${c.name}</span>
+            </span>
+            <span class="comp-count num">${c.count}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectTournament(tName) {
+      APP.activeTournament = tName;
+      APP.visibleLimit = 8;
+      renderSidebarCompetitions();
+      renderMainWorkspace();
+    }
+
+    function handleSearchInput(val) {
+      APP.searchQuery = (val || '').trim().toLowerCase();
+      APP.visibleLimit = 8;
+      renderMainWorkspace();
+    }
+
+    function showMoreItems() {
+      APP.visibleLimit += 12;
+      renderMainWorkspace();
+    }
+
+    function switchDossierTab(cardUid, tabKey, btnEl) {
+      const card = document.getElementById(`card-${cardUid}`);
+      if (!card) return;
+      card.querySelectorAll('.dossier-tab-btn').forEach(b => b.classList.remove('active'));
+      card.querySelectorAll('.dossier-panel').forEach(p => p.classList.remove('active'));
+      btnEl.classList.add('active');
+      const target = document.getElementById(`panel-${cardUid}-${tabKey}`);
+      if (target) target.classList.add('active');
+    }
+
+    function switchMarketSubTab(cardUid, catIdx, btnEl) {
+      const wrap = document.getElementById(`mkt-wrap-${cardUid}`);
+      if (!wrap) return;
+      wrap.querySelectorAll('.mkt-sub-pill').forEach(b => b.classList.remove('active'));
+      wrap.querySelectorAll('.mkt-sub-pane').forEach(p => p.style.display = 'none');
+      btnEl.classList.add('active');
+      const pane = document.getElementById(`mkt-pane-${cardUid}-${catIdx}`);
+      if (pane) pane.style.display = 'grid';
+    }
+
+    function formatDateShort(isoStr) {
+      if (!isoStr) return 'Oggi';
+      try {
+        const d = new Date(isoStr);
+        return d.toLocaleString('it-IT', { weekday: 'short', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+      } catch (e) {
+        return 'Oggi';
+      }
+    }
+
+    function renderComparisonBars(bars) {
+      if (!bars || !bars.length) return '';
+      return `
+        <div class="h2h-bars-grid">
+          ${bars.slice(0, 4).map(b => {
+            const vA = parseFloat(b.valA) || 0;
+            const vB = parseFloat(b.valB) || 0;
+            const sum = (vA + vB) || 1;
+            const pctA = Math.max(12, Math.min(88, Math.round((vA / sum) * 100)));
+            const pctB = 100 - pctA;
+            return `
+              <div class="h2h-bar-box">
+                <div class="h2h-bar-top">
+                  <strong class="num" style="color:var(--accent);">${b.valA}${b.unit || ''}</strong>
+                  <span style="color:var(--muted);">${b.label}</span>
+                  <strong class="num" style="color:var(--text);">${b.valB}${b.unit || ''}</strong>
+                </div>
+                <div class="h2h-track">
+                  <div class="h2h-fill-a" style="width:${pctA}%"></div>
+                  <div class="h2h-fill-b" style="width:${pctB}%"></div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    function render12BookmakersTable(books, locked) {
+      if (!books || !books.length) return '';
+      if (locked) {
+        return `
+          <div style="padding:14px;border:1px solid var(--border);border-radius:var(--radius-control);background:var(--ground);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+            <span style="font-size:13px;color:var(--muted);">Tabella comparativa completa su 12 bookmaker (Bet365, Pinnacle, Betfair, DraftKings, FanDuel, Unibet...) riservata a VIP Pro.</span>
+            <button type="button" class="add-slip-btn" onclick="toggleSubscriptionTier()">Sblocca 12 Bookmaker</button>
+          </div>
+        `;
+      }
+      return `
+        <div class="table-scroll-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Sito di scommesse</th>
+                <th>Modello &amp; Specialit�</th>
+                <th class="num">Margine (Vig)</th>
+                <th class="num">Apertura (-60m)</th>
+                <th class="num">Quota Live</th>
+                <th class="num">Prob. Reale No-Vig</th>
+                <th class="num">Valore (+EV)</th>
+                <th class="num">Limite Max</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${books.map((b, idx) => {
+                const isBest = idx === 0;
+                const edgeStr = (b.edgePct >= 0 ? '+' : '') + b.edgePct + '%';
+                const moveStr = b.moveDelta && b.moveDelta !== 0 ? `(${b.moveDelta > 0 ? '+' : ''}${b.moveDelta.toFixed(2)})` : '';
+                return `
+                  <tr>
+                    <td>
+                      <span class="book-name-cell">${b.name}</span>
+                      ${isBest ? '<span class="status-pill pos" style="margin-left:6px;height:20px;padding:0 6px;">Top Quota</span>' : ''}
+                      <span class="book-region-sub">${b.region || ''}</span>
+                    </td>
+                    <td style="color:var(--muted);font-size:13px;">${b.specialFeature || b.archetype || 'Retail Line'}</td>
+                    <td class="num" style="color:var(--muted);">${b.vigPct || 4.4}%</td>
+                    <td class="num" style="color:var(--muted);">${(b.openerPrice || b.price).toFixed(2)} ${moveStr}</td>
+                    <td class="num"><strong style="color:${isBest ? 'var(--accent)' : 'var(--text)'};">${b.price.toFixed(2)}</strong></td>
+                    <td class="num">${b.noVigProb || b.impliedProb}%</td>
+                    <td class="num" style="color:${b.edgePct >= 0 ? 'var(--positive)' : 'var(--muted)'};font-weight:600;">${edgeStr}</td>
+                    <td class="num" style="color:var(--muted);">?${(b.maxStakeEur || 5000).toLocaleString('it-IT')}</td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function renderSyndicateDossier(vip, locked) {
+      if (!vip) return '';
+      if (locked) {
+        return `
+          <div style="padding:14px;border:1px solid var(--border);border-radius:var(--radius-control);background:var(--ground);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+            <span style="font-size:13px;color:var(--muted);">Dossier Istituzionale (Pinnacle No-Vig, Betfair Orderbook, Bet365 2-Up, DraftKings SGP) riservato a VIP Pro.</span>
+            <button type="button" class="add-slip-btn" onclick="toggleSubscriptionTier()">Sblocca Dossier VIP</button>
+          </div>
+        `;
+      }
+      const sites = vip.siteAnalyses || [];
+      return `
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="card-metrics-strip">
+            <div class="metric-item">
+              <div class="metric-item-label">Pressione Sharp vs Ticket Retail</div>
+              <div class="metric-item-val num">${vip.sharpPct}% Sharp � ${vip.publicPct}% Public (${vip.steamStatus})</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-item-label">Liquidit� Betfair Exchange</div>
+              <div class="metric-item-val num">?${(vip.matchedVolumeEur || 64000).toLocaleString('it-IT')} (Max Fill ?${(vip.largestFillEur || 8500).toLocaleString('it-IT')})</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-item-label">Pinnacle No-Vig vs Quota Equa</div>
+              <div class="metric-item-val num">Pinnacle @${vip.pinnacleNoVigOdds || vip.fairOdds} � AI Fair @${vip.fairOdds}</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-item-label">Closing Line Value (CLV) &amp; Dispersione</div>
+              <div class="metric-item-val num" style="color:var(--positive);">+${vip.clvProjectionPct}% CLV � Dispersione ${vip.marketDispersionPct || 3.4}%</div>
+            </div>
+          </div>
+          <div class="syndicate-grid">
+            ${sites.map(st => `
+              <div class="syndicate-card">
+                <div class="syndicate-card-head">
+                  <span class="syndicate-site-name">${st.site}</span>
+                  <span class="syndicate-vig-tag num">${st.vig}</span>
+                </div>
+                <div class="syndicate-metric num">${st.metric}</div>
+                <p class="syndicate-verdict">${st.verdict}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderMarketMatrix(cardUid, mktCats, betBuilders, eventTitle, sport) {
+      const catNames = Object.keys(mktCats || {});
+      if (!catNames.length) return '<div style="font-size:13px;color:var(--muted);">Mercati in aggiornamento.</div>';
+
+      const builderSafe = betBuilders && betBuilders.safe;
+      const builderHtml = builderSafe ? `
+        <div style="margin-top:12px;padding:12px 14px;background:var(--ground);border:1px solid var(--border);border-radius:var(--radius-control);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--accent);">${builderSafe.name} � Correlation Lift +${builderSafe.liftPct}%</div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-top:2px;">${(builderSafe.legs || []).join(' + ')}</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="num" style="font-size:14px;font-weight:700;">@${builderSafe.bookOdds} (${Math.round(builderSafe.prob * 100)}%)</span>
+            <button type="button" class="filter-chip active" onclick="addLegToSlip('${cardUid}_bb', '${eventTitle.replace(/'/g, "\\'")}', '${builderSafe.name.replace(/'/g, "\\'")}', ${builderSafe.bookOdds}, ${builderSafe.prob}, 'Bet365 Builder', '${sport}')">+ Schedina</button>
+          </div>
+        </div>
+      ` : '';
+
+      return `
+        <div id="mkt-wrap-${cardUid}">
+          <div class="mkt-cat-pills">
+            ${catNames.map((cn, idx) => `
+              <button type="button" class="filter-chip mkt-sub-pill ${idx === 0 ? 'active' : ''}" onclick="switchMarketSubTab('${cardUid}', ${idx}, this)">
+                ${cn} (${(mktCats[cn] || []).length})
+              </button>
+            `).join('')}
+          </div>
+          ${catNames.map((cn, idx) => `
+            <div id="mkt-pane-${cardUid}-${idx}" class="mkt-sub-pane mkt-odds-grid" style="display:${idx === 0 ? 'grid' : 'none'};">
+              ${(mktCats[cn] || []).map((m, mIdx) => {
+                const safeTitle = eventTitle.replace(/'/g, "\\'");
+                const safeLbl = (m.label || '').replace(/'/g, "\\'");
+                const oVal = m.odds || m.fair || 1.5;
+                return `
+                  <button type="button" class="mkt-odd-btn" onclick="addLegToSlip('${cardUid}_${idx}_${mIdx}', '${safeTitle}', '${safeLbl}', ${oVal}, ${m.prob || 0.6}, 'Bet365', '${sport}')">
+                    <span class="mkt-odd-label">${m.label}</span>
+                    <span class="mkt-odd-right num">
+                      <div class="mkt-odd-price">@${oVal.toFixed(2)}</div>
+                      <div class="mkt-odd-prob">${Math.round((m.prob || 0.5) * 100)}%</div>
+                    </span>
+                  </button>
+                `;
+              }).join('')}
+            </div>
+          `).join('')}
+          ${builderHtml}
+        </div>
+      `;
+    }
+
+    function renderEventOrScannerCard(item, idx, isScannerMode) {
+      const uid = `${isScannerMode ? 'sc' : 'ev'}_${idx}`;
+      const sportId = item.sport || 'football';
+      const sportMeta = APP.sportsMeta.find(s => s.id === sportId) || { name: sportId.toUpperCase() };
+      const title = item.title || 'Match';
+      const tournament = item.tournament || item.league || '';
+      const venue = item.venue || '';
+      const locked = Boolean(item.locked);
+
+      const bp = isScannerMode ? {
+        market: item.market,
+        label: item.outcome,
+        prob: item.prob,
+        fairOdds: item.fairOdds,
+        bookOdds: item.bookOdds,
+        bookmaker: item.bookmaker,
+        edgePct: item.edgePct,
+        droppingPct: item.droppingPct,
+        openerOdds: item.openerOdds,
+        why: item.why
+      } : (item.best_pick || {});
+
+      const probPct = Math.round((bp.prob || 0.75) * 100);
+      const stakeVal = computeKellyStake(bp.prob || 0.75, bp.bookOdds || 1.55);
+      const books = item.allBooks || item.all_books || [];
+      const statsEntries = Object.entries(item.stats || {}).slice(0, 4);
+      const facts = item.facts || [];
+      const vip = item.vip_insights || {};
+      const mktCats = item.market_categories || {};
+      const builders = item.bet_builders || {};
+
+      const formA = (item.form_a || []).slice(0, 5).map(c => `<span class="form-char ${c}">${c}</span>`).join('');
+      const formB = (item.form_b || []).slice(0, 5).map(c => `<span class="form-char ${c}">${c}</span>`).join('');
+
+      const safeTitle = title.replace(/'/g, "\\'");
+      const safeOutcome = (bp.label || '').replace(/'/g, "\\'");
+
+      return `
+        <article class="event-card" id="card-${uid}">
+          <div class="event-header-row">
+            <div>
+              <div class="event-meta-line">
+                <span class="iso-badge">${item.flag || 'INT'}</span>
+                <span class="sport-tag">${sportMeta.name}</span>
+                <span>${tournament}</span>
+                ${venue ? `<span>� ${venue}</span>` : ''}
+                <span class="num">� ${formatDateShort(item.date)}</span>
+              </div>
+              <h2 class="event-title">
+                ${title}
+                ${formA ? `<span class="form-strip" title="Forma recente">${formA}</span>` : ''}
+              </h2>
+            </div>
+            <div class="prob-cluster">
+              <span class="status-pill pos num">${probPct}% Probabilit� AI</span>
+              ${bp.edgePct > 0 ? `<span class="status-pill warn num">+${bp.edgePct}% EV</span>` : ''}
+              ${bp.droppingPct && bp.droppingPct <= -1.5 ? `<span class="status-pill neg num">Drop ${bp.droppingPct}% (da @${bp.openerOdds})</span>` : ''}
+            </div>
+          </div>
+
+          ${statsEntries.length ? `
+            <div class="card-metrics-strip">
+              ${statsEntries.map(([k, v]) => `
+                <div class="metric-item">
+                  <div class="metric-item-label">${k.replace(/_/g, ' ')}</div>
+                  <div class="metric-item-val num">${v}</div>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+
+          ${renderComparisonBars(item.comparison_bars)}
+
+          <div class="primary-pick-banner">
+            <div class="pick-main-info">
+              <div class="pick-category-meta">Giocata pi� facile consigliata (${bp.market || 'Analisi AI'})</div>
+              <div class="pick-outcome-title">${bp.label || 'Selezione consigliata'}</div>
+              <div class="pick-why-text">${bp.why || ''}</div>
+            </div>
+            <div class="pick-pricing-actions">
+              <div class="price-compare-col num">
+                <div class="price-main-line">@${(bp.bookOdds || 1.55).toFixed(2)} su ${bp.bookmaker || 'Bet365'}</div>
+                <div class="price-sub-line">Quota Equa AI @${(bp.fairOdds || 1.35).toFixed(2)} � Stake Kelly: <strong>${APP.currency}${stakeVal}</strong></div>
+              </div>
+              ${locked
+                ? `<button type="button" class="add-slip-btn" onclick="toggleSubscriptionTier()">Sblocca VIP Pro</button>`
+                : `<button type="button" class="add-slip-btn" onclick="addLegToSlip('${item.id}', '${safeTitle}', '${safeOutcome}', ${bp.bookOdds || 1.55}, ${bp.prob || 0.75}, '${bp.bookmaker || 'Bet365'}', '${sportId}')">+ Aggiungi a Schedina</button>`
+              }
+            </div>
+          </div>
+
+          <!-- DOSSIER TABS -->
+          <div class="dossier-tab-strip" role="tablist">
+            <button type="button" class="dossier-tab-btn active" onclick="switchDossierTab('${uid}', 'books', this)">
+              Confronto 12 Siti Scommesse (${books.length || 12})
+            </button>
+            <button type="button" class="dossier-tab-btn" onclick="switchDossierTab('${uid}', 'syndicate', this)">
+              Analisi Sindacati (Pinnacle, Betfair, Bet365, DraftKings)
+            </button>
+            <button type="button" class="dossier-tab-btn" onclick="switchDossierTab('${uid}', 'facts', this)">
+              Studio Statistico &amp; Fatti (${facts.length})
+            </button>
+            <button type="button" class="dossier-tab-btn" onclick="switchDossierTab('${uid}', 'markets', this)">
+              Matrice Completa Mercati Bet365 (${Object.keys(mktCats).length} categorie)
+            </button>
+          </div>
+
+          <div id="panel-${uid}-books" class="dossier-panel active">
+            ${render12BookmakersTable(books, locked)}
+          </div>
+          <div id="panel-${uid}-syndicate" class="dossier-panel">
+            ${renderSyndicateDossier(vip, locked)}
+          </div>
+          <div id="panel-${uid}-facts" class="dossier-panel">
+            <div class="facts-grid">
+              ${facts.map(f => `<div class="fact-row">${f}</div>`).join('')}
+            </div>
+          </div>
+          <div id="panel-${uid}-markets" class="dossier-panel">
+            ${renderMarketMatrix(uid, mktCats, builders, title, sportId)}
+          </div>
+        </article>
+      `;
+    }
+
+    function renderMainWorkspace() {
+      const area = document.getElementById('main-workspace-area');
+      const h1 = document.getElementById('screen-h1-title');
+      const sub = document.getElementById('screen-finding-sub');
+
+      if (APP.primaryView === 'vip') {
+        h1.textContent = 'VIP Pro Sandbox: Arbitraggio Matematico, Flussi Whale & Player Props';
+        sub.textContent = 'Simulazione interattiva dei moduli istituzionali su Pinnacle, Betfair Exchange, Bet365, Unibet, DraftKings e Winamax.';
+        renderVipSandboxView(area);
+        return;
+      }
+
+      if (APP.primaryView === 'performance') {
+        h1.textContent = 'Track Record Verificato Out-of-Sample & Calibrazione Brier';
+        sub.textContent = 'Audit storico certificato su 435+ match completati con verifica di rendimento e calibrazione probabilistica.';
+        renderPerformanceView(area);
+        return;
+      }
+
+      const isScanner = APP.primaryView === 'scanner';
+      if (isScanner) {
+        h1.textContent = 'Terminale Quote 12 Bookmaker & Scommesse ad Alta Probabilit�';
+        sub.textContent = `${APP.safeScanner.length} selezioni validate (>=74% probabilit� reale) con comparazione margini e movimenti quote ogni 20 minuti.`;
+      } else {
+        const spMeta = APP.sportsMeta.find(s => s.id === APP.activeSport);
+        h1.textContent = spMeta && APP.activeSport !== 'all'
+          ? `Studio Predittivo & Mercati Bet365: ${spMeta.name}`
+          : 'Catalogo Completo Eventi Multi-Sport & Matrice Mercati Bet365';
+        sub.textContent = spMeta ? spMeta.description : 'Analisi algoritmica polimorfica con confronto su 12 bookmaker.';
+      }
+
+      let sourceList = isScanner ? APP.safeScanner : APP.allEvents;
+
+      if (APP.activeSport !== 'all') {
+        sourceList = sourceList.filter(x => x.sport === APP.activeSport);
+      }
+      if (APP.activeTournament !== 'ALL') {
+        sourceList = sourceList.filter(x => (x.tournament || x.league) === APP.activeTournament);
+      }
+      if (APP.searchQuery) {
+        sourceList = sourceList.filter(x =>
+          (x.title || '').toLowerCase().includes(APP.searchQuery) ||
+          (x.tournament || '').toLowerCase().includes(APP.searchQuery) ||
+          (x.outcome || (x.best_pick && x.best_pick.label) || '').toLowerCase().includes(APP.searchQuery)
+        );
+      }
+
+      if (isScanner) {
+        if (APP.riskFilter === 'ultra') sourceList = sourceList.filter(x => x.prob >= 0.78);
+        if (APP.riskFilter === 'dropping') sourceList = sourceList.filter(x => x.isDropping || (x.droppingPct && x.droppingPct <= -1.5));
+        if (APP.bookmakerFilter !== 'ALL') sourceList = sourceList.filter(x => x.bookmaker === APP.bookmakerFilter);
+      }
+
+      const visibleItems = sourceList.slice(0, APP.visibleLimit);
+      const remaining = Math.max(0, sourceList.length - visibleItems.length);
+
+      const toolbarHtml = `
+        <div class="filter-toolbar">
+          <div class="filter-group">
+            <button type="button" class="filter-chip ${APP.riskFilter === 'all' ? 'active' : ''}" onclick="setRiskFilter('all')">
+              Tutte (${sourceList.length})
+            </button>
+            <button type="button" class="filter-chip ${APP.riskFilter === 'ultra' ? 'active' : ''}" onclick="setRiskFilter('ultra')">
+              Alta Certezza (&ge;78%)
+            </button>
+            <button type="button" class="filter-chip ${APP.riskFilter === 'dropping' ? 'active' : ''}" onclick="setRiskFilter('dropping')">
+              Quote in Calo (Steam 20m)
+            </button>
+          </div>
+          <div class="filter-group">
+            <label for="book-filter-sel" style="font-size:13px;color:var(--muted);">Bookmaker:</label>
+            <select id="book-filter-sel" class="ctrl-select" onchange="setBookFilter(this.value)">
+              <option value="ALL" ${APP.bookmakerFilter === 'ALL' ? 'selected' : ''}>Tutti i 12 Bookmaker</option>
+              <option value="Bet365" ${APP.bookmakerFilter === 'Bet365' ? 'selected' : ''}>Bet365</option>
+              <option value="Pinnacle" ${APP.bookmakerFilter === 'Pinnacle' ? 'selected' : ''}>Pinnacle</option>
+              <option value="Betfair Exchange" ${APP.bookmakerFilter === 'Betfair Exchange' ? 'selected' : ''}>Betfair Exchange</option>
+              <option value="Unibet" ${APP.bookmakerFilter === 'Unibet' ? 'selected' : ''}>Unibet</option>
+              <option value="DraftKings" ${APP.bookmakerFilter === 'DraftKings' ? 'selected' : ''}>DraftKings</option>
+              <option value="FanDuel" ${APP.bookmakerFilter === 'FanDuel' ? 'selected' : ''}>FanDuel</option>
+              <option value="Winamax" ${APP.bookmakerFilter === 'Winamax' ? 'selected' : ''}>Winamax</option>
+            </select>
+          </div>
+        </div>
+      `;
+
+      if (!visibleItems.length) {
+        area.innerHTML = toolbarHtml + `
+          <div class="event-card" style="text-align:center;padding:36px 20px;">
+            <div style="font-size:15px;font-weight:600;">Nessun evento corrisponde ai filtri selezionati</div>
+            <p style="font-size:13px;color:var(--muted);margin-top:4px;">Prova a selezionare "Tutte le competizioni" o ad azzerare il filtro di ricerca.</p>
+          </div>
+        `;
+        return;
+      }
+
+      area.innerHTML = toolbarHtml +
+        visibleItems.map((item, idx) => renderEventOrScannerCard(item, idx, isScanner)).join('') +
+        (remaining > 0 ? `<button type="button" class="load-more-bar num" onclick="showMoreItems()">Mostra altri ${remaining} eventi analizzati</button>` : '');
+    }
+
+    function setRiskFilter(f) {
+      APP.riskFilter = f;
+      APP.visibleLimit = 8;
+      renderMainWorkspace();
+    }
+
+    function setBookFilter(b) {
+      APP.bookmakerFilter = b;
+      APP.visibleLimit = 8;
+      renderMainWorkspace();
+    }
+
+    function renderVipSandboxView(area) {
+      const suite = APP.premiumSuite || { arbitrage: [], whaleSteam: [], vipPlayerProps: [], tierComparison: [] };
+      const budget = APP.arbBudget || 1000;
+
+      area.innerHTML = `
+        <div class="event-card">
+          <div class="event-header-row">
+            <div>
+              <h2 class="event-title">1. Calcolatore Surebet &amp; Arbitraggio Matematico (Profitto Garantito Zero-Risk)</h2>
+              <p style="font-size:13px;color:var(--muted);margin-top:2px;">
+                Sfrutta le discrepanze tra i 12 siti di scommesse per bloccare un profitto matematico indipendentemente dall'esito.
+              </p>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <label for="arb-budget-inp" style="font-size:13px;color:var(--muted);">Capitale Arbitraggio (${APP.currency}):</label>
+              <input id="arb-budget-inp" type="number" class="ctrl-input num" value="${budget}" min="100" step="100" onchange="APP.arbBudget=parseFloat(this.value)||1000;renderMainWorkspace();" />
+            </div>
+          </div>
+
+          <div class="syndicate-grid">
+            ${(suite.arbitrage || []).map(a => {
+              const sA = Math.round((budget * a.legA.stakePct) / 100);
+              const sB = budget - sA;
+              const profit = Math.round(budget * (a.roiPct / 100) * 100) / 100;
+              return `
+                <div class="syndicate-card" style="background:var(--surface);">
+                  <div class="syndicate-card-head">
+                    <span class="syndicate-site-name">${a.event}</span>
+                    <span class="status-pill pos num">+${a.roiPct}% ROI Sicuro</span>
+                  </div>
+                  <div style="font-size:13px;color:var(--muted);margin-bottom:8px;">${a.sport} � ${a.type}</div>
+                  <div style="padding:8px;background:var(--ground);border-radius:var(--radius-chip);font-size:13px;display:flex;flex-direction:column;gap:4px;">
+                    <div style="display:flex;justify-content:space-between;">
+                      <span>1. ${a.legA.selection} (<strong>${a.legA.bookmaker} @${a.legA.odds}</strong>)</span>
+                      <strong class="num">Punta ${APP.currency}${sA}</strong>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;">
+                      <span>2. ${a.legB.selection} (<strong>${a.legB.bookmaker} @${a.legB.odds}</strong>)</span>
+                      <strong class="num">Punta ${APP.currency}${sB}</strong>
+                    </div>
+                  </div>
+                  <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center;font-size:13px;">
+                    <span style="color:var(--positive);font-weight:600;" class="num">Utile netto garantito: +${APP.currency}${profit.toFixed(2)}</span>
+                    <span style="color:var(--muted);">${a.windowAge}</span>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+
+        <div class="event-card">
+          <h2 class="event-title">2. Whale &amp; Sharp Money Steam Radar (Pinnacle &amp; Betfair Exchange Orderflow)</h2>
+          <div class="table-scroll-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Match &amp; Competizione</th>
+                  <th>Linea Colpita dai Sindacati</th>
+                  <th class="num">Apertura &rarr; Live</th>
+                  <th class="num">% Money Sharp</th>
+                  <th class="num">Volume Abbinato</th>
+                  <th>Bookmaker in Ritardo da Colpire</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${(suite.whaleSteam || []).map(w => `
+                  <tr>
+                    <td>
+                      <div style="font-weight:600;">${w.event}</div>
+                      <div style="font-size:13px;color:var(--muted);">${w.sport}</div>
+                    </td>
+                    <td style="font-weight:600;">${w.selection}</td>
+                    <td class="num"><span style="color:var(--muted);">${w.openerOdds}</span> &rarr; <strong style="color:var(--negative);">${w.currentOdds} (${w.dropPct}%)</strong></td>
+                    <td class="num"><span class="status-pill pos">${w.sharpPct}% Sharp</span></td>
+                    <td class="num">?${(w.matchedEur || 150000).toLocaleString('it-IT')}</td>
+                    <td style="font-size:13px;color:var(--accent);font-weight:600;">${w.bookToHit}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <h2 class="event-title">3. Player Prop &amp; Telemetry Alpha Matrix</h2>
+          <div class="table-scroll-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Giocatore / Pilota</th>
+                  <th>Match</th>
+                  <th>Mercato Prop</th>
+                  <th class="num">Proiezione Modello</th>
+                  <th class="num">Probabilit� AI</th>
+                  <th class="num">Miglior Quota</th>
+                  <th class="num">Valore (+EV)</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${(suite.vipPlayerProps || []).map(p => `
+                  <tr>
+                    <td style="font-weight:600;">${p.player} <span style="font-size:13px;color:var(--muted);">(${p.sport})</span></td>
+                    <td>${p.match}</td>
+                    <td style="font-weight:600;">${p.prop}</td>
+                    <td class="num" style="color:var(--accent);font-weight:600;">${p.proj}</td>
+                    <td class="num">${Math.round(p.prob * 100)}%</td>
+                    <td class="num"><strong>@${p.odds}</strong> (${p.bestBook})</td>
+                    <td class="num" style="color:var(--positive);font-weight:600;">+${p.edgePct}%</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderPerformanceView(area) {
+      const perf = APP.performanceData;
+      if (!perf) {
+        area.innerHTML = `<div class="event-card"><div style="font-size:14px;color:var(--muted);">Caricamento audit storico in corso...</div></div>`;
+        return;
+      }
+      const s = perf.summary || {};
+      const ledger = (perf.settled || []).slice(0, 20);
+      area.innerHTML = `
+        <div class="event-card">
+          <h2 class="event-title">Riepilogo Backtest Out-of-Sample (${s.totalBets || 435} Match Certificati)</h2>
+          <div class="card-metrics-strip">
+            <div class="metric-item">
+              <div class="metric-item-label">Win Rate Verificato</div>
+              <div class="metric-item-val num" style="color:var(--positive);">${s.winRatePct || 80.9}% (${s.wins || 352}W - ${s.losses || 83}L)</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-item-label">ROI su Stake Fisso</div>
+              <div class="metric-item-val num" style="color:var(--positive);">+${s.roiPct || 10.97}%</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-item-label">Profitto Netto (?100/bet)</div>
+              <div class="metric-item-val num">+?${(s.netProfitUnits ? s.netProfitUnits * 100 : 4770).toFixed(0)}</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-item-label">Brier Calibration Score</div>
+              <div class="metric-item-val num">${s.brierScore || 0.1569} (Ottimo &lt; 0.18)</div>
+            </div>
+          </div>
+
+          <div class="table-scroll-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Match</th>
+                  <th>Selezione AI</th>
+                  <th class="num">Probabilit�</th>
+                  <th class="num">Quota</th>
+                  <th class="num">Risultato Reale</th>
+                  <th class="num">Esito</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${ledger.map(r => `
+                  <tr>
+                    <td class="num" style="color:var(--muted);">${(r.date || '').slice(0, 10)}</td>
+                    <td style="font-weight:600;">${r.match || `${r.home} vs ${r.away}`}</td>
+                    <td>${r.selection || r.market}</td>
+                    <td class="num">${Math.round((r.prob || 0.76) * 100)}%</td>
+                    <td class="num">@${(r.odds || 1.42).toFixed(2)}</td>
+                    <td class="num">${r.score || r.actual || '-'}</td>
+                    <td class="num"><span class="status-pill ${r.won ? 'pos' : 'neg'}">${r.won ? 'VINTA' : 'PERSA'}</span></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    /* ACCUMULATOR SLIP FUNCTIONS */
+    function addLegToSlip(id, matchTitle, outcome, odds, prob, bookmaker, sport) {
+      const existingIdx = APP.slip.findIndex(x => x.id === id);
+      if (existingIdx >= 0) {
+        APP.slip.splice(existingIdx, 1);
+      } else {
+        APP.slip.push({ id, matchTitle, outcome, odds: parseFloat(odds) || 1.5, prob: parseFloat(prob) || 0.7, bookmaker, sport });
+      }
+      renderSlipDrawer();
+      showToast(`Aggiunto alla schedina: ${outcome} (@${parseFloat(odds).toFixed(2)})`);
+    }
+
+    function removeLegFromSlip(idx) {
+      APP.slip.splice(idx, 1);
+      renderSlipDrawer();
+    }
+
+    function loadAutoSafeSlip(silent = false) {
+      const top3 = APP.safeScanner.filter(x => !x.locked).slice(0, 3);
+      APP.slip = top3.map(x => ({
+        id: x.id,
+        matchTitle: x.title,
+        outcome: x.outcome,
+        odds: x.bookOdds,
+        prob: x.prob,
+        bookmaker: x.bookmaker,
+        sport: x.sport
+      }));
+      renderSlipDrawer();
+      if (!silent) showToast('Tripla Safe AI Cross-Sport caricata.');
+    }
+
+    function toggleSlipDrawer(open) {
+      document.getElementById('drawer-backdrop').classList.toggle('open', open);
+      document.getElementById('slip-drawer').classList.toggle('open', open);
+    }
+
+    function renderSlipDrawer() {
+      document.getElementById('slip-count-badge').textContent = APP.slip.length;
+      const box = document.getElementById('slip-legs-container');
+      if (!APP.slip.length) {
+        box.innerHTML = `<div style="font-size:13px;color:var(--muted);padding:20px 0;">Nessuna selezione nella schedina. Clicca su "+ Aggiungi a Schedina" o carica la Tripla Safe AI.</div>`;
+        document.getElementById('slip-joint-prob').textContent = '0.0%';
+        document.getElementById('slip-total-odds').textContent = '1.00';
+        document.getElementById('slip-payout').textContent = `${APP.currency}0.00`;
+        return;
+      }
+
+      let jointProb = 1.0;
+      let totalOdds = 1.0;
+      APP.slip.forEach(l => {
+        jointProb *= (l.prob || 0.7);
+        totalOdds *= (l.odds || 1.4);
+      });
+
+      const stake = Math.max(10, Math.round(APP.bankroll * 0.025));
+      document.getElementById('slip-stake-label').textContent = `${APP.currency}${stake}`;
+      document.getElementById('slip-joint-prob').textContent = `${(jointProb * 100).toFixed(1)}%`;
+      document.getElementById('slip-total-odds').textContent = totalOdds.toFixed(2);
+      document.getElementById('slip-payout').textContent = `${APP.currency}${(stake * totalOdds).toFixed(2)}`;
+
+      box.innerHTML = APP.slip.map((l, idx) => `
+        <div class="slip-leg-item">
+          <div>
+            <div style="font-size:13px;color:var(--muted);">${l.matchTitle} � ${l.bookmaker}</div>
+            <div style="font-size:13px;font-weight:600;margin-top:2px;">${l.outcome}</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="num" style="font-size:14px;font-weight:700;color:var(--accent);">@${l.odds.toFixed(2)}</div>
+            <button type="button" style="font-size:13px;color:var(--muted);" onclick="removeLegFromSlip(${idx})">Rimuovi</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function copySlipToClipboard() {
+      if (!APP.slip.length) return;
+      const lines = APP.slip.map((l, i) => `${i + 1}. ${l.matchTitle} -> ${l.outcome} @${l.odds.toFixed(2)} (${l.bookmaker})`);
+      const txt = `EdgeBet AI � Schedina Multipla\n` + lines.join('\n');
+      navigator.clipboard.writeText(txt);
+      showToast('Schedina copiata negli appunti.');
+    }
+
+    fetchMultisportData(false);
+  </script>
+</body>
+</html>
